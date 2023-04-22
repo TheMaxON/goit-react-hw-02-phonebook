@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+import { Label } from '../Input/Input.styled.jsx';
+import { InputStyle } from '../Input/Input.styled.jsx';
 
 class Filter extends Component {
   state = {
@@ -15,18 +18,23 @@ class Filter extends Component {
     const { currentFilter } = this.props;
 
     return (
-      <label htmlFor="search">
+      <Label htmlFor="search">
         Find contacts by name
-        <input
+        <InputStyle
           type="text"
           name="search"
           placeholder="Search"
           onChange={this.changeFilter}
           value={currentFilter}
         />
-      </label>
+      </Label>
     );
   }
 }
 
 export default Filter;
+
+Filter.propTypes = {
+  currentFilter: PropTypes.string.isRequired,
+  updateFilter: PropTypes.func.isRequired,
+};

@@ -1,9 +1,29 @@
 @import-normalize; /* bring in normalize.css styles */
 
+:root {
+  --color-background: linear-gradient(
+    119deg,
+    rgba(38, 38, 38, 1) 0%,
+    rgba(17, 17, 17, 1) 100%
+  );
+  --color-accent: #00a990;
+  --color-secondary: #1a1a1a;
+  --color-alert: #f34648;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2 {
+  margin-bottom: 15px;
 }
 
 body {
@@ -15,11 +35,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(
-    119deg,
-    rgba(38, 38, 38, 1) 0%,
-    rgba(17, 17, 17, 1) 100%
-  );
+  background: var(--color-background);
 }
 
 code {
