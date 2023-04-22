@@ -13,6 +13,11 @@ class Input extends Component {
     number: '',
   };
 
+  onChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
+
   onSubmit = event => {
     event.preventDefault();
     const { name, number } = event.target.elements;
@@ -29,8 +34,17 @@ class Input extends Component {
           number: this.state.number,
         };
         this.props.onSubmit(newContact);
+        this.reset();
       }
     );
+  };
+
+  reset = () => {
+    this.setState({
+      id: '',
+      name: '',
+      number: '',
+    });
   };
 
   render() {
@@ -41,7 +55,9 @@ class Input extends Component {
           <InputStyle
             type="text"
             name="name"
+            value={this.state.name}
             placeholder="Type your name..."
+            onChange={this.onChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
@@ -52,7 +68,9 @@ class Input extends Component {
           <InputStyle
             type="tel"
             name="number"
+            value={this.state.number}
             placeholder="Type your phone number..."
+            onChange={this.onChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
