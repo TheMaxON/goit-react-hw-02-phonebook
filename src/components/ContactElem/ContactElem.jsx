@@ -1,9 +1,12 @@
 export const ContactElem = props => {
-  console.log('what elem gets', props);
+  const { id, name, number, onRemove } = props;
   return (
     <li>
-      {props.name}
-      {props.number}
+      {name}
+      {number}
+      <button type="button" onClick={() => onRemove(id)}>
+        Remove
+      </button>
     </li>
   );
 };

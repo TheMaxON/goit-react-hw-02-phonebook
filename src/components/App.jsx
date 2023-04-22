@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Input from './Input/Input';
 import { ContactsList } from './ContactsList/ContactsList';
+import Filter from './Filter/Filter';
+import { Section } from './Section/Section';
 
 export class App extends Component {
   state = {
@@ -9,28 +11,48 @@ export class App extends Component {
   };
 
   addContact = newContact => {
-    console.log('Default contacts get: ', newContact);
+    if (
+      !this.state.contacts
+        .map(contact => contact.name)
+        .includes(newContact.name)
+    ) {
+      this.setState(prevState => ({
+        contacts: [newContact, ...prevState.contacts],
+      }));
+      return;
+    }
+    return alert(`${newContact.name} is already in contacts.`);
+  };
+
+  onRemove = id => {
     this.setState(prevState => ({
-      contacts: [newContact, ...prevState.contacts],
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
 
+  changeFilter = query => {
+    this.setState({ filter: query });
+  };
+
   render() {
-    console.log('Default contacts: ', this.state.contacts);
     return (
       <>
-        <Input onSubmit={this.addContact} />
-        <label htmlFor="search">
-          Find contacts by name
-          <input
-            type="text"
-            name="search"
-            onChange={event => this.setState({ filter: event.target.value })}
-            value={this.state.filter}
+        <Section>
+          <h1>Phonebook</h1>
+          <Input onSubmit={this.addContact} />
+        </Section>
+        <Section>
+          <h2>Contacts</h2>
+          <Filter
+            currentFilter={this.state.filter}
+            updateFilter={this.changeFilter}
           />
-        </label>
-
-        <ContactsList contacts={this.state.contacts} />
+          <ContactsList
+            contacts={this.state.contacts}
+            filter={this.state.filter}
+            onRemove={this.onRemove}
+          />
+        </Section>
       </>
     );
   }
