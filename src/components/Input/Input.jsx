@@ -8,7 +8,6 @@ import { Button } from './Input.styled.jsx';
 
 class Input extends Component {
   state = {
-    id: '',
     name: '',
     number: '',
   };
@@ -20,23 +19,21 @@ class Input extends Component {
 
   onSubmit = event => {
     event.preventDefault();
+
     const { name, number } = event.target.elements;
-    this.setState(
-      {
-        id: nanoid(),
-        name: name.value,
-        number: number.value,
-      },
-      () => {
-        const newContact = {
-          id: this.state.id,
-          name: this.state.name,
-          number: this.state.number,
-        };
-        this.props.onSubmit(newContact);
-        this.reset();
-      }
-    );
+    this.setState({
+      name: name.value,
+      number: number.value,
+    });
+
+    const newContact = {
+      id: nanoid(),
+      name: this.state.name,
+      number: this.state.number,
+    };
+
+    this.props.onSubmit(newContact);
+    this.reset();
   };
 
   reset = () => {

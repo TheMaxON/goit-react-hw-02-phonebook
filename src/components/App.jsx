@@ -12,9 +12,11 @@ export class App extends Component {
 
   addContact = newContact => {
     if (
-      !this.state.contacts
-        .map(contact => contact.name)
-        .includes(newContact.name)
+      !this.state.contacts.find(
+        contact =>
+          contact.name.toLocaleLowerCase() ===
+          newContact.name.toLocaleLowerCase()
+      )
     ) {
       this.setState(prevState => ({
         contacts: [newContact, ...prevState.contacts],
@@ -34,6 +36,14 @@ export class App extends Component {
     this.setState({ filter: query });
   };
 
+  showFiltered = () => {
+    return this.state.contacts.filter(item =>
+      item.name
+        .toLocaleLowerCase()
+        .includes(this.state.filter.toLocaleLowerCase())
+    );
+  };
+
   render() {
     return (
       <>
@@ -50,6 +60,7 @@ export class App extends Component {
           <ContactsList
             contacts={this.state.contacts}
             filter={this.state.filter}
+            showFiltered={this.showFiltered}
             onRemove={this.onRemove}
           />
         </Section>

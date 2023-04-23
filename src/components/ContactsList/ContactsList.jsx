@@ -3,33 +3,28 @@ import { ContactElem } from '../ContactElem/ContactElem';
 import { ContactsListStyle } from './ContactsList.styled.jsx';
 
 export const ContactsList = props => {
-  const { contacts } = props;
-  const { filter } = props;
+  const { showFiltered } = props;
   const { onRemove } = props;
+  const filtered = showFiltered();
 
   return (
     <ContactsListStyle>
-      {contacts
-        .filter(item =>
-          item.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
-        )
-        .map(contact => {
-          return (
-            <ContactElem
-              key={contact.id}
-              id={contact.id}
-              name={contact.name}
-              number={contact.number}
-              onRemove={onRemove}
-            />
-          );
-        })}
+      {filtered.map(contact => {
+        return (
+          <ContactElem
+            key={contact.id}
+            id={contact.id}
+            name={contact.name}
+            number={contact.number}
+            onRemove={onRemove}
+          />
+        );
+      })}
     </ContactsListStyle>
   );
 };
 
 ContactsList.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
-  onRemove: PropTypes.func.isRequired,
+  showFiltered: PropTypes.func,
+  onRemove: PropTypes.func,
 };
