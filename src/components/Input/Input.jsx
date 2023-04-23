@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { nanoid } from 'nanoid';
-import { InputContainer } from './Input.styled.jsx';
-import { Label } from './Input.styled.jsx';
-import { InputStyle } from './Input.styled.jsx';
-import { Button } from './Input.styled.jsx';
+import { InputContainer, Label, InputStyle, Button } from './Input.styled.jsx';
 
 class Input extends Component {
   state = {

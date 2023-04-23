@@ -58,8 +58,6 @@ export class App extends Component {
             updateFilter={this.changeFilter}
           />
           <ContactsList
-            contacts={this.state.contacts}
-            filter={this.state.filter}
             showFiltered={this.showFiltered}
             onRemove={this.onRemove}
           />

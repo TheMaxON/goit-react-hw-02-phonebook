@@ -1,8 +1,10 @@
 import { PropTypes } from 'prop-types';
-import { ContactElemStyle } from './ContactElem.styled.jsx';
-import { ContactName } from './ContactElem.styled.jsx';
-import { ContactNumber } from './ContactElem.styled.jsx';
-import { DeleteBtn } from './ContactElem.styled.jsx';
+import {
+  ContactElemStyle,
+  ContactName,
+  ContactNumber,
+  DeleteBtn,
+} from './ContactElem.styled.jsx';
 
 export const ContactElem = props => {
   const { id, name, number, onRemove } = props;
